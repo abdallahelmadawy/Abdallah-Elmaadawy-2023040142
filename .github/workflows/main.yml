@@ -12,5 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "testing github"
-        run: pwd
+      - uses: actions/checkout@v3
+
+      - name: "login to docker hup"
+        run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --pasword ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: "biilding image"
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/AbdallahElmadawy-2023040142 .
+
+      - name: "pushing image"
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/AbdallahElmadawy-2023040142  
